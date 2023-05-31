@@ -1,0 +1,758 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Contact Management Api",
+    "description": "management contact which has 3 tables namely user contact and address and is made using spring jpa for data manipulation",
+    "version": "1.0.0",
+    "contact": {
+      "name": "zam",
+      "url": "https://github.com/tajutzam",
+      "email": "mohammadtajutzamzami07@gmail.com"
+    }
+  },
+  "servers": [
+    {
+      "url": "localhost:8080/api"
+    }
+  ],
+  "paths": {
+    "/users" : {
+        "post": {
+          "summary": "register",
+          "description": "Api for register new user",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "username" : {
+                      "required": "true",
+                      "type": "string"
+                    },
+                    "password" : {
+                      "required": "true",
+                      "type": "string"
+                    },
+                    "name" : {
+                      "required": "true",
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200" : {
+              "description": "success register",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "data" : {
+                        "type": "string",
+                        "example": "OK"
+                      },
+                      "errors" : {
+                        "type": "string",
+                           "example": null
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+    },
+    "/users/current": {
+      "get": {
+        "summary": "return user currently login",
+        "description": "Optional extended description in Markdown.",
+        "parameters": [
+          {
+            "name" : "X-API-TOKEN",
+            "required": true,
+            "description": "token for login user",
+            "in": "header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data" : {
+                      "properties": {
+                        "name" : {
+                          "type": "string"
+                        },
+                        "username" : {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "errors" : {
+                      "type" : "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401" : {
+            "description": "ERROR for unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data" : {
+                      "properties": {
+
+                      }
+                    },
+                    "errors" : {
+                      "type" : "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400" : {
+            "description": "ERROR for bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data" : {
+                      "properties": {
+
+                      }
+                    },
+                    "errors" : {
+                      "type" : "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/update" : {
+      "put" : {
+        "parameters": [
+          {
+            "name" : "X-API-TOKEN",
+            "required": true,
+            "description": "token for login user",
+            "in": "header"
+          }
+          ],
+        "requestBody": {
+          "description": "request body to update user",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username" : {
+                    "required": "true",
+                    "type": "string"
+                  },
+              "password" : {
+                  "required": "true",
+                "type": "string"
+              }
+                }
+              }
+            }
+          }
+        },
+        "summary": "update",
+        "description": "update for user login",
+        "responses": {
+          "200": {
+            "description": "response success update user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data" : {
+                      "properties": {
+                        "name" : {
+                          "type": "string"
+                        },
+                        "username" : {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "response error unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data" : {
+                      "properties": {
+                        "data" : {
+                          "example" : null
+                        },
+                        "errors" : {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "response validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data" : {
+                      "example" : null
+                    },
+                    "errors" : {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/contacts" : {
+      "post": {
+        "summary": "post new contacts",
+        "operationId": "",
+        "parameters": [
+          {
+            "name" : "X-API-TOKEN",
+            "required": true,
+            "description": "token user",
+            "in": "header"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "firstName": {
+                    "required": "true",
+                    "type": "string",
+                    "maximum": 100
+                  },
+                  "lastName" : {
+
+                    "type": "string",
+                    "maximum": 100
+                  },
+                  "email" : {
+                    "type": "string",
+                    "maximum": 100
+                  },
+                  "phone" : {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "response success create contacts",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data" : {
+                      "type": "object",
+                      "properties": {
+                        "id" : {
+                          "type": "string"
+                        },
+                        "firstName" : {
+                          "type": "string"
+                        },
+                        "lastName" : {
+                          "nullable": true,
+                          "type": "string"
+                        },
+                        "email" : {
+                          "nullable": true,
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "errors" : {
+                      "type": "object",
+                      "example": null
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "response error unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data" : {
+                      "properties": {
+                        "data" : {
+                          "example" : null
+                        },
+                        "errors" : {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "response validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "example": null
+                    },
+                    "errors": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "edit contacts",
+        "operationId": "",
+        "parameters": [
+          {
+            "name" : "X-API-TOKEN",
+            "required": true,
+            "description": "token user",
+            "in": "header"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id" : {
+                    "type": "string",
+                    "required": true
+                  },
+                  "firstName": {
+                    "required": "true",
+                    "type": "string",
+                    "maximum": 100
+                  },
+                  "lastName" : {
+
+                    "type": "string",
+                    "maximum": 100
+                  },
+                  "email" : {
+                    "type": "string",
+                    "maximum": 100
+                  },
+                  "phone" : {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "response success create contacts",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data" : {
+                      "type": "object",
+                      "properties": {
+                        "id" : {
+                          "type": "string"
+                        },
+                        "firstName" : {
+                          "type": "string"
+                        },
+                        "lastName" : {
+                          "nullable": true,
+                          "type": "string"
+                        },
+                        "email" : {
+                          "nullable": true,
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "errors" : {
+                      "type": "object",
+                      "example": null
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "response error unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data" : {
+                      "properties": {
+                        "data" : {
+                          "example" : null
+                        },
+                        "errors" : {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "response validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "example": null
+                    },
+                    "errors": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "search contact by name email or phone",
+        "operationId": "",
+        "parameters": [
+          {
+            "name" : "X-API-TOKEN",
+            "required": true,
+            "description": "token for login user",
+            "in": "header"
+          },
+          {
+            "description": "name of contact",
+            "name": "name",
+            "in": "query"
+          },
+          {
+            "description": "number phone of contact",
+            "name": "phone",
+            "in": "query"
+          },
+          {
+            "description": "email of contact",
+            "name": "email",
+            "in": "query"
+          },
+          {
+            "description": "page of contact",
+            "name": "page",
+            "in": "query"
+          },
+          {
+            "description": "size of contact",
+            "name": "size",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "response 200 success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data" : {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id" : {
+                            "type": "string"
+                          },
+                          "firstName" : {
+                            "type": "string"
+                          },
+                          "lastName" : {
+                            "type": "string"
+                          },
+                          "phone" : {
+                            "type": "string"
+                          },
+                          "email" : {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "errors" : {
+                      "type": "string"
+                    },
+                    "paging" : {
+                      "type": "object",
+                      "properties": {
+                        "currentPage" : {
+                          "type": "integer"
+                        },
+                        "totalPage" : {
+                          "type": "integer"
+                        },
+                        "size" : {
+                          "type": "integer"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+
+          },
+          "401" : {
+            "description": "400 code response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data" : {
+                      "type": "object",
+                      "example" : null
+                    },
+                    "errors" : {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/contacts/{contactId}" : {
+        "get": {
+          "parameters": [
+            {
+              "in": "path",
+              "name" : "contactId",
+              "schema": {
+                "type": "string",
+                "required": "true",
+                "description": "id for contacts model"
+              }
+            },
+            {
+              "name" : "X-API-TOKEN",
+              "required": true,
+              "description": "token for  user",
+              "in": "header"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "response success create contacts",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "properties": {
+                      "data" : {
+                        "type": "object",
+                        "properties": {
+                          "id" : {
+                            "type": "string"
+                          },
+                          "firstName" : {
+                            "type": "string"
+                          },
+                          "lastName" : {
+                            "nullable": true,
+                            "type": "string"
+                          },
+                          "email" : {
+                            "nullable": true,
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "errors" : {
+                        "type": "object",
+                        "example": null
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "401": {
+              "description": "response error unauthorized",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "data" : {
+                        "properties": {
+                          "data" : {
+                            "example" : null
+                          },
+                          "errors" : {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+      "delete": {
+        "summary": "delete contact",
+        "operationId": "",
+        "parameters": [
+          {
+            "in": "path",
+            "name" : "contactId",
+            "schema": {
+              "type": "string",
+              "required": "true",
+              "description": "id for contacts model"
+            }
+          },
+          {
+            "name" : "X-API-TOKEN",
+            "required": true,
+            "description": "token for  user",
+            "in": "header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "response success delete contact",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data" : {
+                     "type": "string",
+                      "example" : "OK"
+                    },
+                    "errors" : {
+                      "type": "object",
+                      "example": null
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "response error unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data" : {
+                      "type": "string",
+                      "example" : null
+                    },
+                    "errors" : {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "response error bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data" : {
+                        "type": "string",
+                      "example" : null
+                      },
+                    "errors" : {
+                      "type": "string"
+                    }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
