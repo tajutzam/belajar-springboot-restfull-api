@@ -16,50 +16,49 @@
     }
   ],
   "paths": {
-    "/users" : {
-        "post": {
-          "summary": "register",
-          "description": "Api for register new user",
-          "requestBody": {
-            "required": true,
+    "/users": {
+      "post": {
+        "summary": "register",
+        "description": "Api for register new user",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "required": "true",
+                    "type": "string"
+                  },
+                  "password": {
+                    "required": "true",
+                    "type": "string"
+                  },
+                  "name": {
+                    "required": "true",
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "success register",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "username" : {
-                      "required": "true",
-                      "type": "string"
+                    "data": {
+                      "type": "string",
+                      "example": "OK"
                     },
-                    "password" : {
-                      "required": "true",
-                      "type": "string"
-                    },
-                    "name" : {
-                      "required": "true",
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "responses": {
-            "200" : {
-              "description": "success register",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "object",
-                    "properties": {
-                      "data" : {
-                        "type": "string",
-                        "example": "OK"
-                      },
-                      "errors" : {
-                        "type": "string",
-                           "example": null
-                      }
+                    "errors": {
+                      "type": "string",
+                      "example": null
                     }
                   }
                 }
@@ -67,6 +66,7 @@
             }
           }
         }
+      }
     },
     "/users/current": {
       "get": {
@@ -74,7 +74,7 @@
         "description": "Optional extended description in Markdown.",
         "parameters": [
           {
-            "name" : "X-API-TOKEN",
+            "name": "X-API-TOKEN",
             "required": true,
             "description": "token for login user",
             "in": "header"
@@ -88,58 +88,56 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "data" : {
+                    "data": {
                       "properties": {
-                        "name" : {
+                        "name": {
                           "type": "string"
                         },
-                        "username" : {
+                        "username": {
                           "type": "string"
                         }
                       }
                     },
-                    "errors" : {
-                      "type" : "string"
+                    "errors": {
+                      "type": "string"
                     }
                   }
                 }
               }
             }
           },
-          "401" : {
+          "401": {
             "description": "ERROR for unauthorized",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "data" : {
+                    "data": {
                       "properties": {
-
                       }
                     },
-                    "errors" : {
-                      "type" : "string"
+                    "errors": {
+                      "type": "string"
                     }
                   }
                 }
               }
             }
           },
-          "400" : {
+          "400": {
             "description": "ERROR for bad request",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "data" : {
+                    "data": {
                       "properties": {
-
                       }
                     },
-                    "errors" : {
-                      "type" : "string"
+                    "errors": {
+                      "type": "string"
                     }
                   }
                 }
@@ -149,16 +147,16 @@
         }
       }
     },
-    "/users/update" : {
-      "put" : {
+    "/users/update": {
+      "put": {
         "parameters": [
           {
-            "name" : "X-API-TOKEN",
+            "name": "X-API-TOKEN",
             "required": true,
             "description": "token for login user",
             "in": "header"
           }
-          ],
+        ],
         "requestBody": {
           "description": "request body to update user",
           "content": {
@@ -166,14 +164,14 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "username" : {
+                  "username": {
                     "required": "true",
                     "type": "string"
                   },
-              "password" : {
-                  "required": "true",
-                "type": "string"
-              }
+                  "password": {
+                    "required": "true",
+                    "type": "string"
+                  }
                 }
               }
             }
@@ -189,12 +187,12 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "data" : {
+                    "data": {
                       "properties": {
-                        "name" : {
+                        "name": {
                           "type": "string"
                         },
-                        "username" : {
+                        "username": {
                           "type": "string"
                         }
                       }
@@ -211,12 +209,12 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "data" : {
+                    "data": {
                       "properties": {
-                        "data" : {
-                          "example" : null
+                        "data": {
+                          "example": null
                         },
-                        "errors" : {
+                        "errors": {
                           "type": "string"
                         }
                       }
@@ -233,10 +231,10 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "data" : {
-                      "example" : null
+                    "data": {
+                      "example": null
                     },
-                    "errors" : {
+                    "errors": {
                       "type": "string"
                     }
                   }
@@ -247,13 +245,13 @@
         }
       }
     },
-    "/contacts" : {
+    "/contacts": {
       "post": {
         "summary": "post new contacts",
         "operationId": "",
         "parameters": [
           {
-            "name" : "X-API-TOKEN",
+            "name": "X-API-TOKEN",
             "required": true,
             "description": "token user",
             "in": "header"
@@ -270,16 +268,15 @@
                     "type": "string",
                     "maximum": 100
                   },
-                  "lastName" : {
-
+                  "lastName": {
                     "type": "string",
                     "maximum": 100
                   },
-                  "email" : {
+                  "email": {
                     "type": "string",
                     "maximum": 100
                   },
-                  "phone" : {
+                  "phone": {
                     "type": "string"
                   }
                 }
@@ -294,26 +291,26 @@
               "application/json": {
                 "schema": {
                   "properties": {
-                    "data" : {
+                    "data": {
                       "type": "object",
                       "properties": {
-                        "id" : {
+                        "id": {
                           "type": "string"
                         },
-                        "firstName" : {
+                        "firstName": {
                           "type": "string"
                         },
-                        "lastName" : {
+                        "lastName": {
                           "nullable": true,
                           "type": "string"
                         },
-                        "email" : {
+                        "email": {
                           "nullable": true,
                           "type": "string"
                         }
                       }
                     },
-                    "errors" : {
+                    "errors": {
                       "type": "object",
                       "example": null
                     }
@@ -329,12 +326,12 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "data" : {
+                    "data": {
                       "properties": {
-                        "data" : {
-                          "example" : null
+                        "data": {
+                          "example": null
                         },
-                        "errors" : {
+                        "errors": {
                           "type": "string"
                         }
                       }
@@ -369,7 +366,7 @@
         "operationId": "",
         "parameters": [
           {
-            "name" : "X-API-TOKEN",
+            "name": "X-API-TOKEN",
             "required": true,
             "description": "token user",
             "in": "header"
@@ -381,7 +378,7 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "id" : {
+                  "id": {
                     "type": "string",
                     "required": true
                   },
@@ -390,16 +387,15 @@
                     "type": "string",
                     "maximum": 100
                   },
-                  "lastName" : {
-
+                  "lastName": {
                     "type": "string",
                     "maximum": 100
                   },
-                  "email" : {
+                  "email": {
                     "type": "string",
                     "maximum": 100
                   },
-                  "phone" : {
+                  "phone": {
                     "type": "string"
                   }
                 }
@@ -414,26 +410,26 @@
               "application/json": {
                 "schema": {
                   "properties": {
-                    "data" : {
+                    "data": {
                       "type": "object",
                       "properties": {
-                        "id" : {
+                        "id": {
                           "type": "string"
                         },
-                        "firstName" : {
+                        "firstName": {
                           "type": "string"
                         },
-                        "lastName" : {
+                        "lastName": {
                           "nullable": true,
                           "type": "string"
                         },
-                        "email" : {
+                        "email": {
                           "nullable": true,
                           "type": "string"
                         }
                       }
                     },
-                    "errors" : {
+                    "errors": {
                       "type": "object",
                       "example": null
                     }
@@ -449,12 +445,12 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "data" : {
+                    "data": {
                       "properties": {
-                        "data" : {
-                          "example" : null
+                        "data": {
+                          "example": null
                         },
-                        "errors" : {
+                        "errors": {
                           "type": "string"
                         }
                       }
@@ -489,7 +485,7 @@
         "operationId": "",
         "parameters": [
           {
-            "name" : "X-API-TOKEN",
+            "name": "X-API-TOKEN",
             "required": true,
             "description": "token for login user",
             "in": "header"
@@ -527,42 +523,42 @@
               "application/json": {
                 "schema": {
                   "properties": {
-                    "data" : {
+                    "data": {
                       "type": "array",
                       "items": {
                         "type": "object",
                         "properties": {
-                          "id" : {
+                          "id": {
                             "type": "string"
                           },
-                          "firstName" : {
+                          "firstName": {
                             "type": "string"
                           },
-                          "lastName" : {
+                          "lastName": {
                             "type": "string"
                           },
-                          "phone" : {
+                          "phone": {
                             "type": "string"
                           },
-                          "email" : {
+                          "email": {
                             "type": "string"
                           }
                         }
                       }
                     },
-                    "errors" : {
+                    "errors": {
                       "type": "string"
                     },
-                    "paging" : {
+                    "paging": {
                       "type": "object",
                       "properties": {
-                        "currentPage" : {
+                        "currentPage": {
                           "type": "integer"
                         },
-                        "totalPage" : {
+                        "totalPage": {
                           "type": "integer"
                         },
-                        "size" : {
+                        "size": {
                           "type": "integer"
                         }
                       }
@@ -571,19 +567,18 @@
                 }
               }
             }
-
           },
-          "401" : {
+          "401": {
             "description": "400 code response",
             "content": {
               "application/json": {
                 "schema": {
                   "properties": {
-                    "data" : {
+                    "data": {
                       "type": "object",
-                      "example" : null
+                      "example": null
                     },
-                    "errors" : {
+                    "errors": {
                       "type": "string"
                     }
                   }
@@ -594,91 +589,12 @@
         }
       }
     },
-    "/contacts/{contactId}" : {
-        "get": {
-          "parameters": [
-            {
-              "in": "path",
-              "name" : "contactId",
-              "schema": {
-                "type": "string",
-                "required": "true",
-                "description": "id for contacts model"
-              }
-            },
-            {
-              "name" : "X-API-TOKEN",
-              "required": true,
-              "description": "token for  user",
-              "in": "header"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "response success create contacts",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "properties": {
-                      "data" : {
-                        "type": "object",
-                        "properties": {
-                          "id" : {
-                            "type": "string"
-                          },
-                          "firstName" : {
-                            "type": "string"
-                          },
-                          "lastName" : {
-                            "nullable": true,
-                            "type": "string"
-                          },
-                          "email" : {
-                            "nullable": true,
-                            "type": "string"
-                          }
-                        }
-                      },
-                      "errors" : {
-                        "type": "object",
-                        "example": null
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "401": {
-              "description": "response error unauthorized",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "object",
-                    "properties": {
-                      "data" : {
-                        "properties": {
-                          "data" : {
-                            "example" : null
-                          },
-                          "errors" : {
-                            "type": "string"
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-      "delete": {
-        "summary": "delete contact",
-        "operationId": "",
+    "/contacts/{contactId}": {
+      "get": {
         "parameters": [
           {
             "in": "path",
-            "name" : "contactId",
+            "name": "contactId",
             "schema": {
               "type": "string",
               "required": "true",
@@ -686,7 +602,7 @@
             }
           },
           {
-            "name" : "X-API-TOKEN",
+            "name": "X-API-TOKEN",
             "required": true,
             "description": "token for  user",
             "in": "header"
@@ -694,16 +610,31 @@
         ],
         "responses": {
           "200": {
-            "description": "response success delete contact",
+            "description": "response success create contacts",
             "content": {
               "application/json": {
                 "schema": {
                   "properties": {
-                    "data" : {
-                     "type": "string",
-                      "example" : "OK"
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "firstName": {
+                          "type": "string"
+                        },
+                        "lastName": {
+                          "nullable": true,
+                          "type": "string"
+                        },
+                        "email": {
+                          "nullable": true,
+                          "type": "string"
+                        }
+                      }
                     },
-                    "errors" : {
+                    "errors": {
                       "type": "object",
                       "example": null
                     }
@@ -719,11 +650,75 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "data" : {
+                    "data": {
+                      "properties": {
+                        "data": {
+                          "example": null
+                        },
+                        "errors": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "delete contact",
+        "operationId": "",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "contactId",
+            "schema": {
+              "type": "string",
+              "required": "true",
+              "description": "id for contacts model"
+            }
+          },
+          {
+            "name": "X-API-TOKEN",
+            "required": true,
+            "description": "token for  user",
+            "in": "header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "response success delete contact",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "data": {
                       "type": "string",
-                      "example" : null
+                      "example": "OK"
                     },
-                    "errors" : {
+                    "errors": {
+                      "type": "object",
+                      "example": null
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "response error unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "string",
+                      "example": null
+                    },
+                    "errors": {
                       "type": "string"
                     }
                   }
@@ -738,13 +733,12 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "data" : {
-                        "type": "string",
-                      "example" : null
-                      },
-                    "errors" : {
+                    "data": {
+                      "type": "string",
+                      "example": null
+                    },
+                    "errors": {
                       "type": "string"
-                    }
                     }
                   }
                 }
@@ -753,6 +747,392 @@
           }
         }
       }
+    },
+    "/api/contacts/{contactId}/addresses": {
+      "description": "api for addresses",
+      "post": {
+        "summary": "create new address for contacts",
+        "operationId": "",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "contactId",
+            "schema": {
+              "type": "string",
+              "required": "true",
+              "description": "id for contacts model"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "request as json",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "street": {
+                    "type": "string"
+                  },
+                  "country": {
+                    "type": "string"
+                  },
+                  "province": {
+                    "type": "string"
+                  },
+                  "postalCode": {
+                    "type": "string"
+                  },
+                  "city": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "response success get data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "street": {
+                          "type": "string"
+                        },
+                        "country": {
+                          "type": "string"
+                        },
+                        "province": {
+                          "type": "string"
+                        },
+                        "postalCode": {
+                          "type": "string"
+                        },
+                        "city": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "errors" :{
+                      "type": "string",
+                      "example" : null
+                    },
+                    "paging" : {
+                      "type": "object",
+                      "example": null
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "response error unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "string",
+                      "example" : null
+                    },
+                    "errors": {
+                      "type": "string"
+                    },
+                    "paging": {
+                      "type": "object",
+                      "example" : null
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/contacts/{contactsId}/addresses/{addressesId}": {
+      "get": {
+        "summary": "get address contacts",
+        "operationId": "",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "contactId",
+            "schema": {
+              "type": "string",
+              "required": "true",
+              "description": "id for contacts model"
+            }
+          },
+          {
+            "name": "X-API-TOKEN",
+            "required": true,
+            "description": "token for  user",
+            "in": "header"
+          },
+          {
+            "in": "path",
+            "name": "addressesId",
+            "schema": {
+              "type": "string",
+              "required": "true",
+              "description": "id addresses"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "response success get data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "street": {
+                          "type": "string"
+                        },
+                        "country": {
+                          "type": "string"
+                        },
+                        "province": {
+                          "type": "string"
+                        },
+                        "postalCode": {
+                          "type": "string"
+                        },
+                        "city": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "response error unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "properties": {
+                        "data": {
+                          "example": null
+                        },
+                        "errors": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "put address data",
+        "operationId": "",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "contactId",
+            "schema": {
+              "type": "string",
+              "required": "true",
+              "description": "id for contacts model"
+            }
+          },
+          {
+            "name": "X-API-TOKEN",
+            "required": true,
+            "description": "token for  user",
+            "in": "header"
+          },
+          {
+            "in": "path",
+            "name": "addressesId",
+            "schema": {
+              "type": "string",
+              "required": "true",
+              "description": "id addresses"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "request as json",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "street": {
+                    "type": "string"
+                  },
+                  "country": {
+                    "type": "string"
+                  },
+                  "province": {
+                    "type": "string"
+                  },
+                  "postalCode": {
+                    "type": "string"
+                  },
+                  "city": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "response success get data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "street": {
+                          "type": "string"
+                        },
+                        "country": {
+                          "type": "string"
+                        },
+                        "province": {
+                          "type": "string"
+                        },
+                        "postalCode": {
+                          "type": "string"
+                        },
+                        "city": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "errors" :{
+                      "type": "string",
+                      "example" : null
+                    },
+                    "paging" : {
+                      "type": "object",
+                      "example": null
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "response error unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "string",
+                      "example" : null
+                    },
+                    "errors": {
+                      "type": "string"
+                    },
+                    "paging": {
+                      "type": "object",
+                      "example" : null
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "delete address contact",
+        "operationId": "",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "contactId",
+            "schema": {
+              "type": "string",
+              "required": "true",
+              "description": "id for contacts model"
+            }
+          },
+          {
+            "name": "X-API-TOKEN",
+            "required": true,
+            "description": "token for  user",
+            "in": "header"
+          },
+          {
+            "in": "path",
+            "name": "addressesId",
+            "schema": {
+              "type": "string",
+              "required": "true",
+              "description": "id addresses"
+            }
+          }
+        ],
+        "responses": {
+            "200": {
+              "description": "success delete",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "data" : {
+                        "type": "string",
+                        "example": "OK"
+                      },
+                      "errors" :{
+                        "type": "string",
+                        "example" : null
+                      },
+                      "paging" : {
+                        "type": "object",
+                        "example": null
+                      }
+                    }
+                  }
+                }
+              }
+            }
+        }
+      }
     }
   }
+}
 

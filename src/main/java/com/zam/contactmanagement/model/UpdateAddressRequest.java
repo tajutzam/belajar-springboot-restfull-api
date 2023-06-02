@@ -1,7 +1,7 @@
 package com.zam.contactmanagement.model;
 
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -9,28 +9,34 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class UpdateContactRequest {
+public class UpdateAddressRequest {
 
-
-
+    @JsonIgnore
     @NotBlank
-    private String id;
+    private String contactId;
+
+    @JsonIgnore
+    @NotBlank
+    private String addressId;
+
+    @Size(max = 100)
+    private String street;
+    @Size(max = 100)
+
+    private String city;
+    @Size(max = 100)
+
+    private String province;
     @NotBlank
     @Size(max = 100)
-    private String firstName;
 
+    private String country;
     @Size(max = 100)
-    private String lastName;
 
-    @Size(max = 100)
-    @Email
-    private String email;
+    private String postalCode;
 
-    @Size(max = 100)
-    private String phone;
 }
